@@ -2,7 +2,7 @@ name: ci
 on: push
 
 env:
-  IMAGE: "eu.gcr.io/mms-olm-cos-cicd-x-3929/digital-article-activation-service:${{GITHUB_REF}}.${{github.run_number}}"
+  IMAGE_NAME: "eu.gcr.io/mms-olm-cos-cicd-x-3929/digital-article-activation-service"
 
 jobs:
   build:
@@ -11,9 +11,10 @@ jobs:
 
     steps:
       - name: Create docker image
+        env:
+          IMAGE: ${IMAGE_NAME}:${GITHUB_REF##*/}.${{github.run_number}}
         run: |
-          echo $TEST
-          echo $IMAGE
+          echo build with ${{ env.IMAGE }}
           # docker build and push
-          docker build -t ${IMAGE} .
+          docker build -t ${{ env.IMAGE }} .
 
