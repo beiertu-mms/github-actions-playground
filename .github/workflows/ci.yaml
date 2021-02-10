@@ -1,0 +1,17 @@
+name: ci
+on: push
+
+env:
+  IMAGE: "eu.gcr.io/mms-olm-cos-cicd-x-3929/digital-article-activation-service:$GITHUB_REF##*/.${{github.run_number}}"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create docker image
+        run: |
+          # docker build and push
+          docker build -t ${IMAGE} .
+
