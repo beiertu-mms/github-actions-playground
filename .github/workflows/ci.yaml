@@ -2,7 +2,8 @@ name: ci
 on: push
 
 env:
-  IMAGE: "eu.gcr.io/mms-olm-cos-cicd-x-3929/digital-article-activation-service:$GITHUB_REF##*/.${{github.run_number}}"
+  TAG: "${{GITHUB_REF##*/}}.${{github.run_number}}"
+  IMAGE: "eu.gcr.io/mms-olm-cos-cicd-x-3929/digital-article-activation-service:$TAG"
 
 jobs:
   build:
@@ -12,6 +13,7 @@ jobs:
     steps:
       - name: Create docker image
         run: |
+          echo $TAG
           # docker build and push
           docker build -t ${IMAGE} .
 
