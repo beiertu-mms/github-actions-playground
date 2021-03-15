@@ -7,10 +7,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Docker build
         env:
           TAG: ${GITHUB_REF##*/}.${{github.run_number}}
         run: |
-          echo $GITHUB_REF
           docker build -t test-image:${{ env.TAG }} .
 
