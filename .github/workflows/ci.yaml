@@ -15,13 +15,14 @@ jobs:
           TAG: ${GITHUB_REF##*/}.${{github.run_number}}
         run: |
           docker build -t test-image:${{ env.TAG }} .
+          echo "::set-output name=tag::${GITHUB_REF##*/}.${{github.run_number}}"
+        id: docker_build
 
       - name: Release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${GITHUB_REF##*/}.${{github.run_number}}
         with:
-          name: ${{ env.TAG }}
-          tag_name: ${{ env.TAG }}
+          name: ${{ steps.docker_build.outputs.tag }}
+          tag_name: ${{ steps.docker_build.outputs.tag }}
 
