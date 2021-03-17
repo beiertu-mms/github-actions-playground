@@ -25,4 +25,5 @@ jobs:
         with:
           name: ${{ steps.docker_build.outputs.tag }}
           tag_name: ${{ steps.docker_build.outputs.tag }}
+          body: "test body"
 
