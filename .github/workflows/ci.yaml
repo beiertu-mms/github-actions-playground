@@ -20,7 +20,7 @@ jobs:
 
       - name: Tag body
         run: |
-          echo "::set-output name=body::$(git log -1)"
+          echo "::set-output name=body::$(git log -1 --oneline)"
         id: body
 
       - name: Release
