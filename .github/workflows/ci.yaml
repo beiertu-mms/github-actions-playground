@@ -23,7 +23,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: "tag name"
-          name: ${{ steps.docker_build.outputs.tag }}
+          tag_name: ${{ steps.docker_build.outputs.tag }}
           body: "test body"
 
