@@ -18,11 +18,16 @@ jobs:
           echo "::set-output name=tag::${GITHUB_REF##*/}.${{github.run_number}}"
         id: docker_build
 
+      - name: Tag body
+        run: |
+          echo "::set-output name=body::$(git log -1)"
+        id: body
+
       - name: Release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.docker_build.outputs.tag }}
-          body: "test body"
+          body: ${{ steps.body.outputs.body }}
 
