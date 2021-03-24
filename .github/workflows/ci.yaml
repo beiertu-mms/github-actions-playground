@@ -30,4 +30,5 @@ jobs:
         with:
           tag_name: ${{ steps.docker_build.outputs.tag }}
           body: ${{ steps.body.outputs.body }}
+          file: |
 
