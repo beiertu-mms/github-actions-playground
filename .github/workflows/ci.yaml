@@ -10,6 +10,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Use action to check for CRLF endings
+        uses: erclu/check-crlf@v1
+
       - name: Docker build
         env:
           TAG: ${GITHUB_REF##*/}.${{github.run_number}}
