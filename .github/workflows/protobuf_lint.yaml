@@ -19,6 +19,4 @@ jobs:
 
       - name: Breaking changes check
         if: github.ref != 'refs/heads/master'
-        run: >-
-          buf breaking
-          --against ".git#ref=${{ github.base_ref }}"
+        run: buf breaking --against .git#ref=${{ github.base_ref }} --verbose
