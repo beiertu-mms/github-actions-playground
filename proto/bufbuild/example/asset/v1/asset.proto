@@ -12,6 +12,7 @@ message Asset {
   bufbuild.example.semver.v1.Version version = 3;
   bytes data = 4;
   google.protobuf.Timestamp create_time = 5;
+  string info = 6;
 }
 
 message CreateAssetRequest {
