@@ -12,7 +12,7 @@ jobs:
       - name: Setup buf
         uses: wizhi/setup-buf@v1
         with:
-          version: 0.32.0
+          version: 0.43.2
 
       - name: Protobuf lint
         run: buf lint
