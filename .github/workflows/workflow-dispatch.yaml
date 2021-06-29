@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Event ${{ github.event }}!"
+          echo "Event ${{ github.event.name }}!"
