@@ -2,10 +2,15 @@ name: workflow dispatch
 on:
   push:
   workflow_dispatch:
+    inputs:
+      name:
+        description: 'Event name'
+        required: true
+        default: 'workflow-dispatch'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Event ${{ github.event.type }}!"
+          echo "Event ${{ github.event.inputs.name }}!"
