@@ -13,25 +13,18 @@ jobs:
       - name: Use action to check for CRLF endings
         uses: erclu/check-crlf@v1
 
-      - name: Docker build
+      - name: Build
         env:
           TAG: ${GITHUB_REF##*/}.${{github.run_number}}
         run: |
-          docker build -t test-image:${{ env.TAG }} .
+          # docker build -t test-image:${{ env.TAG }} .
           echo "::set-output name=tag::${GITHUB_REF##*/}.${{github.run_number}}"
-        id: docker_build
+        id: build
 
-      - name: Tag body
-        run: |
-          echo "::set-output name=body::$(git log -1 --oneline)"
-        id: body
-
-      - name: Release
+      - name: Tag
         uses: softprops/action-gh-release@v1
+        if: github.ref == 'refs/heads/master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.docker_build.outputs.tag }}
-          body: ${{ steps.body.outputs.body }}
-          file: |
-            README.md
+          tag_name: ${{ steps.build.outputs.tag }}
