@@ -1,5 +1,12 @@
 name: ci
-on: [push]
+on: 
+  push:
+  workflow_dispatch:
+    inputs:
+      is_rerun:
+        description: 'is this a manually triggered rerun'
+        required: false
+        default: "true"
 
 jobs:
   build:
@@ -7,41 +14,52 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - run: env
 
-      - name: Use action to check for CRLF endings
-        uses: erclu/check-crlf@v1
+      - if: github.event.inputs.is_rerun == 'true'
+        run: echo "this is a re-run"
 
-      - name: Build
-        env:
-          TAG: ${GITHUB_REF##*/}.${{github.run_number}}
-        run: |
-          # docker build -t test-image:${{ env.TAG }} .
-          echo "::set-output name=tag::${GITHUB_REF##*/}.${{github.run_number}}"
-        id: build
+      - if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: echo "this is a push"
 
-      - name: Tag
-        uses: softprops/action-gh-release@v1
-        if: github.ref == 'refs/heads/master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.build.outputs.tag }}
+      - if: github.ref == 'refs/heads/master' && github.event_name == 'workflow_dispatch'
+        run: echo "this is from workflow_dispatch"
 
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v1
-        if: github.ref == 'refs/heads/master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     - name: Checkout
+#       uses: actions/checkout@v2
 
-      - name: Create Release
-        uses: actions/create-release@v1
-        if: github.ref == 'refs/heads/master'
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          body: ${{steps.github_release.outputs.changelog}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     - name: Use action to check for CRLF endings
+#       uses: erclu/check-crlf@v1
+
+#     - name: Build
+#       env:
+#         TAG: ${GITHUB_REF##*/}.${{github.run_number}}
+#       run: |
+#         # docker build -t test-image:${{ env.TAG }} .
+#         echo "::set-output name=tag::${GITHUB_REF##*/}.${{github.run_number}}"
+#       id: build
+
+#     - name: Tag
+#       uses: softprops/action-gh-release@v1
+#       if: github.ref == 'refs/heads/master'
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+#         tag_name: ${{ steps.build.outputs.tag }}
+
+#     - name: Build Changelog
+#       id: github_release
+#       uses: mikepenz/release-changelog-builder-action@v2.1.0
+#       if: github.ref == 'refs/heads/master'
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#     - name: Create Release
+#       uses: actions/create-release@v1
+#       if: github.ref == 'refs/heads/master'
+#       with:
+#         tag_name: ${{ github.ref }}
+#         release_name: ${{ github.ref }}
+#         body: ${{steps.github_release.outputs.changelog}}
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
