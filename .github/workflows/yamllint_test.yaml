@@ -1,0 +1,23 @@
+---
+name: Lint YAML
+on:
+  push:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+
+jobs:
+  yamllint:
+    name: Lint YAML
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Lint
+        uses: beiertu-mms/yamllint-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
