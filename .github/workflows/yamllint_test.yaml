@@ -20,4 +20,3 @@ jobs:
         uses: beiertu-mms/yamllint-github-action@fix/script/adjust-output
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
