@@ -29,7 +29,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           echo -e "\ntag local branch again"
-          git tag --annotate "$major_version" "$GITHUB_SHA"
+          git tag --annotate "$major_version" --message "$major_version" "$GITHUB_SHA"
 
           echo -e "\npush tag to remote"
           git push origin tag "$major_version"
