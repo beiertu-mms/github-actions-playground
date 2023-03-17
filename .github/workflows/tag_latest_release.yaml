@@ -10,9 +10,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        # with:
+          # fetch-depth: 0
 
       - run: |
           echo "$GITHUB_REF"
           version="${GITHUB_REF#refs/tags/}"
           major_version=$(echo "$version" | cut -d'.' -f1)
           echo "$major_version"
+
+          echo "1. list all remote tags"
+          git ls-remote --tags
+
+          echo "2. delete local tag"
+          git tag --delete "$major_version"
+
+          echo "3. push tag deletion to remote"
+          git push origin --delete "$major_version"
+
+          echo "4. tag local branch again"
+          git tag --annotate "$major_version" "$GITHUB_SHA"
+
+          echo "5. push tag to remote"
+          git push origin tag "$major_version"
