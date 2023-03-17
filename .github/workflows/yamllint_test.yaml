@@ -25,4 +25,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: echo -e "\nYamllint result:\n${{ steps.lint.outputs.lint_output }}"
-
+        if: ${{ always() }}
