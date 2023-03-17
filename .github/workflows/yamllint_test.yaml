@@ -18,7 +18,7 @@ jobs:
 
       - name: Lint
         id: lint
-        uses: beiertu-mms/yamllint-composite-action@v1.1.3
+        uses: beiertu-mms/yamllint-composite-action@v1.1.4
         with:
           config_data: "{extends: default, rules: {line-length: {max: 120}}}"
         env:
