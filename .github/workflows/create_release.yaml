@@ -12,11 +12,28 @@ jobs:
     if: github.actor != 'dependabot[bot]'
     permissions:
       contents: write
+    env:
+      semantic_version: "19.0.5"
+    outputs:
+      release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Create Release
         uses: cycjimmy/semantic-release-action@v3
+        with:
+          semantic_version: ${{ env.semantic_version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  update_pom:
+    name: Update pom versions
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: release
+    if: ${{ github.actor != 'dependabot[bot]' && needs.release.outputs.release_version != null }}
+    env:
+      release_version: ${{ needs.release.outputs.release_version }}
+    steps:
+      - run: echo "got new release ${{ env.release_version }}"
