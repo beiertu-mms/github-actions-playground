@@ -24,6 +24,10 @@ jobs:
           echo -e "\ndelete local tag"
           git tag --delete "$major_version" && git push origin --delete "$major_version" || echo "$major_version is not yet tagged"
 
+          echo -e "\nconfigure commiter"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           echo -e "\ntag local branch again"
           git tag --annotate "$major_version" --message "$major_version" "$GITHUB_SHA"
 
