@@ -22,7 +22,9 @@ jobs:
           git ls-remote --tags
 
           echo -e "\ndelete local tag"
-          git tag --delete "$major_version" && git push origin --delete "$major_version" || echo "$major_version is not yet tagged"
+          git tag --delete "$major_version" \
+            && git push origin --delete "$major_version" \
+            || echo "$major_version is not yet tagged"
 
           echo -e "\nconfigure commiter"
           git config --global user.name "github-actions[bot]"
