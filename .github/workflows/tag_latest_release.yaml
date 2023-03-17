@@ -1,0 +1,18 @@
+---
+name: Tag latest release
+on:
+  release:
+    types:
+      - "published"
+
+jobs:
+  tag_latest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: |
+          echo "$GITHUB_REF"
+          version="${GITHUB_REF#refs/tags/}"
+          major_version=$(echo "$version" | cut -d'.' -f1)
+          echo "$major_version"
