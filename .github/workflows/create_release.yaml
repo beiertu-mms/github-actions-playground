@@ -22,6 +22,7 @@ jobs:
 
       - name: Create Release
         uses: cycjimmy/semantic-release-action@v3
+        id: semantic
         with:
           semantic_version: ${{ env.semantic_version }}
         env:
