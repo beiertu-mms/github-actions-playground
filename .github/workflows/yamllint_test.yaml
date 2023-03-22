@@ -26,3 +26,17 @@ jobs:
 
       - run: echo -e "\nYamllint result:\n${{ steps.lint.outputs.lint_output }}"
         if: ${{ always() }}
+
+  yamllint_action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Lint
+        id: lint
+        uses: karancode/yamllint-github-action@v2.1.1
+        with:
+          yamllint_file_or_dir: ./yamllint-github-action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

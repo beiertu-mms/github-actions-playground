@@ -3,4 +3,4 @@ pleh: help
 stuff:
   foo: bar
   bar: foo
-foo: error
+#foo: error
