@@ -20,6 +20,7 @@ jobs:
       - name: Detect dir changes
         id: dir-changed
         run: |
+          git log -m --name-only
           git diff --name-only --diff-filter=d HEAD HEAD~1
           git diff --name-only --diff-filter=d HEAD HEAD~1 | grep "${{ env.dir }}"
           directory=""
