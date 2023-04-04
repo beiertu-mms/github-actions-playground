@@ -1,0 +1,19 @@
+---
+name: GitHub Action Trigger
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - "foo/bar1/**"
+jobs:
+  github-action-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Detect dir changes
+        id: dir-changed
+        run: |
+          git diff --name-only HEAD HEAD~1
