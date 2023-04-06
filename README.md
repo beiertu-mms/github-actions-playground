@@ -4,7 +4,7 @@ My playground to test the functionality of [GitHub Actions](https://github.com/f
 
 ## GitHub pages test
 
-- [mermaid](./mermaid/README.md)
+- [mermaid](./mermaid/index.md)
 
 ## License
 
