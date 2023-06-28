@@ -34,25 +34,20 @@ jobs:
             echo "new_major_version=v${{ steps.next-release.outputs.new_release_major_version }}"
           } >> "$GITHUB_ENV"
 
-      - name: Tag commit
-        if: ${{ env.has_release == 'true' }}
+      - name: Configure committer
         run: |
-          echo "[info] configure committer"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          echo "[info] tag latest commit with ${{ env.new_version }}"
+      - name: Tag commit
+        if: ${{ env.has_release == 'true' }}
+        run: |
+          echo "[info] tag latest commit with version '${{ env.new_version }}'"
           git tag --annotate "${{ env.new_version }}" --message "${{ env.new_version }}"
-
-          echo "[info] move major tag ${{ env.new_major_version }} to the latest commit"
-          git tag --annotate "${{ env.new_major_version }}" --message "${{ env.new_major_version }}" --force
-
-          git log --format="%H %s %d"
-
-          echo "[info] push version tag ${{ env.new_version }}"
           git push origin "${{ env.new_version }}"
 
-          echo "[info] push major version tag ${{ env.new_major_version }}"
+          echo "[info] move major version '${{ env.new_major_version }}' to the latest commit"
+          git tag --annotate "${{ env.new_major_version }}" --message "${{ env.new_major_version }}" --force
           git push origin "${{ env.new_major_version }}" --force
 
       - name: Create release
