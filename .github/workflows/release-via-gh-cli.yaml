@@ -11,11 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Set PAT
+        run: echo "GITHUB_TOKEN=${{ secrets.PAT }}" >> "$GITHUB_ENV"
+
       - name: Clone repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get next release
         uses: cycjimmy/semantic-release-action@v3
@@ -58,6 +61,6 @@ jobs:
       - name: Create release
         if: ${{ env.has_release == 'true' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "${{ env.new_version }}" --generate-notes --latest --target master
