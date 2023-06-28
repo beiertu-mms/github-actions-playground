@@ -1,0 +1,39 @@
+---
+name: Release via gh cli
+
+"on":
+  push:
+    branches:
+      - "master"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          # ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v3
+        id: semantic
+        with:
+          semantic_version: 19.0.5
+          dry_run: true
+          branches: |
+            [
+              "master"
+            ]
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Output
+        run: |
+          echo ${{ steps.semantic.outputs.new_release_published }}
+          echo ${{ steps.semantic.outputs.new_release_version }}
+          echo ${{ steps.semantic.outputs.new_release_major_version }}
+          echo ${{ steps.semantic.outputs.new_release_minor_version }}
+          echo ${{ steps.semantic.outputs.new_release_patch_version }}
