@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ssh-key: ${{ secrets.COMMIT_KEY }}
+          token: ${{ secrets.PAT }}
 
       - name: Get next release
         uses: cycjimmy/semantic-release-action@v3
@@ -58,6 +58,6 @@ jobs:
       - name: Create release
         if: ${{ env.has_release == 'true' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
           gh release create "${{ env.new_version }}" --generate-notes --latest --target master
