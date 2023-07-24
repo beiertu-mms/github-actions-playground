@@ -34,7 +34,7 @@ jobs:
           echo "" >> Changelog.md
           echo "$(git log -n1)" >> Changelog.md
           git add Changelog.md
-          git commit -m "docs: update changelog"
+          git commit -m "docs: update changelog [skip actions]"
 
           echo "push to remote"
           git push origin HEAD
