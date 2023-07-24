@@ -13,7 +13,18 @@ jobs:
         with:
           ssh-key: "${{ secrets.COMMIT_KEY }}"
 
-      - run: |
+      - name: Check for next release
+        uses: cycjimmy/semantic-release-action@v3
+        id: semantic
+        with:
+          semantic_version: '19.0.5'
+          dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push update
+        if: ${{ steps.semantic.outputs.release_version != null }}
+        run: |
           echo "configure commiter"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
