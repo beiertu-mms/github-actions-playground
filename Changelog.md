@@ -53,3 +53,9 @@ Date:   Mon Jul 24 12:58:56 2023 +0200
     * fix(workflows): fix semantic output check
     
     * fix(workflows): fix semantic output check
+
+commit 6bd3ce72a69f0462842fb10730f76179580fd92e
+Author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+Date:   Mon Jul 24 10:59:24 2023 +0000
+
+    docs: update changelog
