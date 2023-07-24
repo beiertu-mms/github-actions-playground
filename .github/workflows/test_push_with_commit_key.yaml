@@ -1,0 +1,29 @@
+---
+name: Test push with commit key
+"on":
+  push:
+    branches:
+      - "master"
+
+jobs:
+  tag_latest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ssh-key: "${{ secrets.COMMIT_KEY }}"
+
+      - run: |
+          echo "configure commiter"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          [[ ! -e Changelog.md ]] && echo "# Changelog" > Changelog.md
+
+          echo "" >> Changelog.md
+          echo "$(git status -n1)" >> Changelog.md
+          git add Changelog.md
+          git commit -m "docs: update changelog"
+
+          echo "push to remote"
+          git push origin HEAD
