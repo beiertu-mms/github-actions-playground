@@ -23,7 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push update
-        if: ${{ steps.semantic.outputs.new_release_published != 'true' }}
+        if: ${{ steps.semantic.outputs.new_release_published == 'true' }}
         run: |
           echo "configure commiter"
           git config --global user.name "github-actions[bot]"
