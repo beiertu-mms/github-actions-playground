@@ -101,3 +101,9 @@ Author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.c
 Date:   Mon Jul 24 11:02:04 2023 +0000
 
     docs: update changelog
+
+commit 4ed86662b5a8ddfd1c4477a24af1f499d38bfcc3
+Author: Tung Beier <44575474+beiertu-mms@users.noreply.github.com>
+Date:   Mon Jul 24 14:18:22 2023 +0200
+
+    fix(workflows): skip ci on bot push to default (#11)
