@@ -6,7 +6,7 @@ name: Test push with commit key
       - "master"
 
 jobs:
-  tag_latest:
+  test_push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,7 +21,7 @@ jobs:
           [[ ! -e Changelog.md ]] && echo "# Changelog" > Changelog.md
 
           echo "" >> Changelog.md
-          echo "$(git status -n1)" >> Changelog.md
+          echo "$(git log -n1)" >> Changelog.md
           git add Changelog.md
           git commit -m "docs: update changelog"
 
