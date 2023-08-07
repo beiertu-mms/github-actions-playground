@@ -22,6 +22,7 @@ jobs:
         uses: beiertu-mms/yamllint-composite-action@v1.2.0
         with:
           config_data: "{extends: default, rules: {line-length: {max: 120}}}"
+          file_or_dir: ./yamllint-github-action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
