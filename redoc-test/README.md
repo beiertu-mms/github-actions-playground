@@ -1,3 +1,3 @@
 # Redoc test with multiple api specs
 
-https://mediamarktsaturn.github.io/beiertu-mms/redoc-test/redoc.html
+https://beiertu-mms.github.io/github-actions-playground/redoc-test/redoc.html

@@ -107,3 +107,11 @@ Author: Tung Beier <44575474+beiertu-mms@users.noreply.github.com>
 Date:   Mon Jul 24 14:18:22 2023 +0200
 
     fix(workflows): skip ci on bot push to default (#11)
+
+commit 3d8601334d115a9ed55781683dc07e998bc39eb5
+Author: Tung Beier <beiertu@mediamarktsaturn.com>
+Date:   Mon Aug 7 10:40:11 2023 +0200
+
+    feat(redoc): add redoc to github pages
+    
+    https://github.com/Redocly/redoc/blob/gh-pages/examples/multiple-apis/index.html
