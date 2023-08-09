@@ -1,4 +1,4 @@
-# GitHub actions playground
+<h1 align="center">GitHub actions playground</h1>
 
 <div align="center">
 
