@@ -10,8 +10,6 @@ jobs:
     name: Release next version
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
-    permissions:
-      contents: write
     env:
       semantic_version: "19.0.5"
     outputs:
