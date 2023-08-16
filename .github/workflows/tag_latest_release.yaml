@@ -16,25 +16,15 @@ jobs:
 
       - run: |
           version="${GITHUB_REF#refs/tags/}"
-          major_version=$(echo "$version" | cut -d'.' -f1)
+          major_version=${version%%.*}
           echo "this release $GITHUB_REF major version is: $major_version"
-
-          echo -e "\nlist all remote tags"
-          git ls-remote --tags
-
-          echo -e "\ndelete local tag"
-          if git tag --delete "$major_version"; then
-            git push origin --delete "$major_version"
-          else
-            echo "$major_version is not yet tagged"
-          fi
 
           echo -e "\nconfigure commiter"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          echo -e "\ntag local branch again"
-          git tag --annotate "$major_version" --message "$major_version" "$GITHUB_SHA"
+          echo -e "\nre-tag major version"
+          git tag --annotate "$major_version" --message "$major_version" --force
+          git push origin "$major_version" --force
 
-          echo -e "\npush tag to remote"
-          git push origin "$major_version"
+          echo "::notice title=Re-tag major version::$major_version"
