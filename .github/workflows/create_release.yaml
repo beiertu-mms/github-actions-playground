@@ -1,6 +1,6 @@
 ---
 name: Create Release
-on: #·yamllint·disable-line·rule:truthy
+"on":
   push:
     branches:
       - master
@@ -20,13 +20,25 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Create Release
+      - name: Get next Release
         uses: cycjimmy/semantic-release-action@v3
         id: semantic
         with:
           semantic_version: ${{ env.semantic_version }}
+          dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: ${{ steps.semantic.outputs.new_release_version != null }}
+        env:
+          VERSION: ${{ steps.semantic.outputs.new_release_version }}
+        with:
+          tag_name: ${{ env.VERSION }}
+          name: Version ${{ env.VERSION }}
+          body: |
+            ${{ env.VERSION }}
 
   update_pom:
     name: Update pom versions
