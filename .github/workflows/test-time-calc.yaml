@@ -1,0 +1,17 @@
+---
+name: Test time calculation
+"on":
+  push:
+    paths:
+      - ".github/workflows/test-time-calc.yaml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "start=$(($(date +%s%N)/1000000))" >> "$GITHUB_ENV"
+      - run: sleep 5
+      - run: |
+          end=$(($(date +%s%N)/1000000))
+          result=$(( $end - ${{ env.start }} ))
+          echo "::notice Run took::${result}ms"
