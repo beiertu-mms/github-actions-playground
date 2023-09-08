@@ -6,6 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       list: ("value-1" "value-2" "value-3")
+      multi: >
+        (
+          "multi-1"
+          "multi-2"
+          "multi-3"
+        )
     steps:
       - run: |
           env
@@ -13,4 +19,9 @@ jobs:
           values=${{ env.list }}
           for value in "${values[@]}"; do
             echo "::notice Value::$value"
+          done
+
+          values=${{ env.multi }}
+          for value in "${values[@]}"; do
+            echo "::notice Multi::$value"
           done
