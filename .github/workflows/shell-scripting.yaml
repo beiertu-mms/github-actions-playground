@@ -1,0 +1,16 @@
+---
+name: Run shell commands
+"on": push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      list: ("value-1" "value-2" "value-3")
+    steps:
+      - run: |
+          env
+
+          values=${{ env.list }}
+          for value in "${values[@]}"; do
+            echo "::notice Value::$value"
+          done
