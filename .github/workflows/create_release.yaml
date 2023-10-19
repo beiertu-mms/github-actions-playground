@@ -18,6 +18,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Install changelog-conventionalcommits
+        run: npm i -D conventional-changelog-conventionalcommits
+
       - name: Get next Release
         uses: cycjimmy/semantic-release-action@v4
         id: semantic
