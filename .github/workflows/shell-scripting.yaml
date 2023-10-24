@@ -1,6 +1,10 @@
 ---
 name: Run shell commands
-"on": push
+"on":
+  push:
+  release:
+    types:
+      - "published"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,6 +18,8 @@ jobs:
         )
     steps:
       - run: |
+          echo "Run on event ${{ github.event_name }}"
+
           env
 
           values=${{ env.list }}
