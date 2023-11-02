@@ -18,4 +18,4 @@ jobs:
         # python-version: ${{ env.python_version }}
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.4.0
+        uses: helm/chart-testing-action@v2.6.0
