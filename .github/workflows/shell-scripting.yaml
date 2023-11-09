@@ -17,6 +17,8 @@ jobs:
           "multi-3"
         )
     steps:
+      - uses: actions/checkout@v4
+
       - run: |
           echo "Run on event ${{ github.event_name }}"
 
@@ -31,5 +33,8 @@ jobs:
           for value in "${values[@]}"; do
             echo "::notice Multi::$value"
           done
+
       - run: |
           yq --help
+
+          echo $(yq eval-all -Nr '.spec.values.image.tag' .github/test/yq-test.yaml | uniq)
