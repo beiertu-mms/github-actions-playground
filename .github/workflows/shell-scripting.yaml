@@ -31,3 +31,5 @@ jobs:
           for value in "${values[@]}"; do
             echo "::notice Multi::$value"
           done
+      - run: |
+          yq --help
