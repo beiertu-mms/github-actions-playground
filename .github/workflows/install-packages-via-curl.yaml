@@ -4,7 +4,7 @@ name: "Install packages via CuRL"
   push:
   workflow_dispatch:
 env:
-  GRYPE_VERSION: 'v0.73.3'
+  GRYPE_VERSION: 'v0.73.4'
 jobs:
   build:
     runs-on: ubuntu-latest
