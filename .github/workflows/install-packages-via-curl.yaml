@@ -3,6 +3,10 @@ name: "Install packages via CuRL"
 "on":
   push:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'A semver with or without v-prefix'
+        required: true
 env:
   GRYPE_VERSION: 'v0.73.4'
 jobs:
@@ -10,14 +14,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          GRYPE_URL="https://github.com/anchore/grype/releases/download"
-          curl -Ls "$GRYPE_URL/${GRYPE_VERSION}/grype_${GRYPE_VERSION:1}_linux_amd64.tar.gz" -o grype.tar.gz
-          curl -Ls "$GRYPE_URL/${GRYPE_VERSION}/grype_${GRYPE_VERSION:1}_checksums.txt" -o grype_checksums.txt
+          echo "orginal $VERSION"
 
-          if ! grep -q "$(sha256sum grype.tar.gz | cut -d' ' -f1)" grype_checksums.txt; then
-            exit 1
-          else
-            mkdir _bin
-            tar xf grype.tar.gz -C _bin
-            ls -l _bin
-          fi
+          VERSION="${VERSION#v}"
+
+          echo "sanitied $VERSION"
+
+        env:
+          VERSION: ${{ inputs.version }}
+    # - run: |
+    #     GRYPE_URL="https://github.com/anchore/grype/releases/download"
+    #     curl -Ls "$GRYPE_URL/${GRYPE_VERSION}/grype_${GRYPE_VERSION:1}_linux_amd64.tar.gz" -o grype.tar.gz
+    #     curl -Ls "$GRYPE_URL/${GRYPE_VERSION}/grype_${GRYPE_VERSION:1}_checksums.txt" -o grype_checksums.txt
+    #
+    #     if ! grep -q "$(sha256sum grype.tar.gz | cut -d' ' -f1)" grype_checksums.txt; then
+    #       exit 1
+    #     else
+    #       mkdir _bin
+    #       tar xf grype.tar.gz -C _bin
+    #       ls -l _bin
+    #     fi
