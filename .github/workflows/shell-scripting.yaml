@@ -23,6 +23,10 @@ jobs:
     steps:
       - run: |
           env | sort
+          if [[ "${{ github.ref_type }}" != 'branch' ]]; then
+            echo "::error file=shell-scripting.yaml,line=17,title=Invalid Ref Type::The ref_type should be branch in case of workflow_dispatch"
+            exit 1
+          fi
 
       - uses: actions/checkout@v4
         with:
