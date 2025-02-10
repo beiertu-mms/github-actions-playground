@@ -8,6 +8,8 @@ jobs:
     name: Set timezone in version 22
     runs-on: ubuntu-22.04
     steps:
+      - run: |
+          timedatectl
       - uses: szenius/set-timezone@v2.0
         with:
           timezoneLinux: "Asia/Singapore"
@@ -17,6 +19,8 @@ jobs:
     name: Set timezone in version 24
     runs-on: ubuntu-24.04
     steps:
+      - run: |
+          timedatectl
       - uses: szenius/set-timezone@v2.0
         with:
           timezoneLinux: "Asia/Singapore"
