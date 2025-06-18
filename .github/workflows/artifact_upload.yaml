@@ -1,0 +1,27 @@
+name: UploadArtifact
+"on":
+  push:
+    branches:
+      - "master"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: github.actor != 'dependabot[bot]'
+    env:
+      release_file: "latest_release.txt"
+    outputs:
+      release_version: ${{ steps.semantic.outputs.new_release_version }}
+      matrix: ${{ steps.result.outputs.matrix }}
+    steps:
+      - name: Create
+        id: result
+        run: |
+          echo "NO_RELEASE" > ${{ env.release_file }}
+
+      - name: Upload release file
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: latest_release
+          path: ${{ env.release_file }}

@@ -1,0 +1,28 @@
+name: DownloadArtifact
+"on":
+  workflow_run:
+    workflows:
+      - UploadArtifact
+    types:
+      - completed
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: ${{ github.event.pull_request.draft == false }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Fetch release artifact
+        if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
+        env:
+          run_id: ${{ github.event.workflow_run.id }}
+        run: |
+          gh run download "$run_id" -n "latest_release"
+          ls -l
+
+          cat latest_release.txt
