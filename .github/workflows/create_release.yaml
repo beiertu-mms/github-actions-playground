@@ -22,7 +22,7 @@ jobs:
         run: npm i -D conventional-changelog-conventionalcommits
 
       - name: Get next Release
-        uses: cycjimmy/semantic-release-action@v5
+        uses: cycjimmy/semantic-release-action@v6
         id: semantic
         with:
           semantic_version: ${{ env.semantic_version }}
