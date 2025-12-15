@@ -19,7 +19,7 @@ jobs:
         if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
         env:
           run_id: ${{ github.event.workflow_run.id }}
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: latest_release
           run-id: ${{ github.event.workflow_run.id }}
