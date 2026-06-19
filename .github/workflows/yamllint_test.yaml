@@ -19,7 +19,7 @@ jobs:
 
       - name: Lint
         id: lint
-        uses: beiertu-mms/yamllint-composite-action@v1.2.0
+        uses: beiertu-mms/yamllint-composite-action@v2.0.0
         with:
           config_data: "{extends: default, rules: {line-length: {max: 120}}}"
           file_or_dir: ./yamllint-github-action
