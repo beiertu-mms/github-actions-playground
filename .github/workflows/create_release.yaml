@@ -11,15 +11,18 @@ jobs:
     if: github.actor != 'dependabot[bot]'
     permissions:
       contents: write
+      issues: write
+      pull-requests: write
     outputs:
       release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v7
 
+      # https://conventional-changelog.js.org/presets/conventional-commits/
       - name: Install changelog-conventionalcommits
         run: |
-          npm i -D conventional-changelog@8 conventional-changelog-writer@9 conventional-changelog-conventionalcommits@10
+          npm i -D conventional-changelog conventional-changelog-conventionalcommits
 
       - name: Get next Release
         uses: cycjimmy/semantic-release-action@v8
@@ -30,17 +33,6 @@ jobs:
           dry_run: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    # - name: Create Release
-    #   uses: softprops/action-gh-release@v3
-    #   if: ${{ steps.semantic.outputs.new_release_version != null }}
-    #   env:
-    #     VERSION: ${{ steps.semantic.outputs.new_release_version }}
-    #   with:
-    #     tag_name: ${{ env.VERSION }}
-    #     name: Version ${{ env.VERSION }}
-    #     body: |
-    #       ${{ env.VERSION }}
 
   update_pom:
     name: Update pom versions
