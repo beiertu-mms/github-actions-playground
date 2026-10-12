@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
     env:
-      semantic_version: "25.0.9"
+      semantic_version: "20.0.1"
     outputs:
       release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
