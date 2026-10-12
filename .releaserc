@@ -7,50 +7,17 @@
       "@semantic-release/commit-analyzer",
       {
         "releaseRules": [
-          {
-            "type": "feat",
-            "release": "minor"
-          },
-          {
-            "type": "perf",
-            "release": "minor"
-          },
-          {
-            "type": "fix",
-            "release": "patch"
-          },
-          {
-            "type": "build",
-            "release": "patch"
-          },
-          {
-            "type": "refactor",
-            "release": "patch"
-          },
-          {
-            "type": "revert",
-            "release": "patch"
-          },
-          {
-            "type": "chore",
-            "release": false
-          },
-          {
-            "type": "ci",
-            "release": false
-          },
-          {
-            "type": "docs",
-            "release": false
-          },
-          {
-            "type": "style",
-            "release": false
-          },
-          {
-            "type": "test",
-            "release": false
-          }
+          { "type": "feat", "release": "minor" },
+          { "type": "perf", "release": "minor" },
+          { "type": "fix", "release": "patch" },
+          { "type": "build", "release": "patch" },
+          { "type": "refactor", "release": "patch" },
+          { "type": "revert", "release": "patch" },
+          { "type": "chore", "release": false },
+          { "type": "ci", "release": false },
+          { "type": "docs", "release": false },
+          { "type": "style", "release": false },
+          { "type": "test", "release": false }
         ]
       }
     ],
@@ -67,50 +34,17 @@
         "preset": "conventionalcommits",
         "presetConfig": {
           "types": [
-            {
-              "type": "feat",
-              "section": ":sparkles: Features"
-            },
-            {
-              "type": "perf",
-              "section": ":zap: Performance Enhancement"
-            },
-            {
-              "type": "fix",
-              "section": ":bug: Fixes"
-            },
-            {
-              "type": "build",
-              "section": ":building_construction: Build"
-            },
-            {
-              "type": "refactor",
-              "section": ":recycle: Refactoring"
-            },
-            {
-              "type": "revert",
-              "section": ":rewind: Revert"
-            },
-            {
-              "type": "chore",
-              "section": ":arrow_up: Updates"
-            },
-            {
-              "type": "ci",
-              "section": ":repeat: Continuous Integration"
-            },
-            {
-              "type": "docs",
-              "section": ":memo: Documentation"
-            },
-            {
-              "type": "style",
-              "section": ":art: Styling"
-            },
-            {
-              "type": "test",
-              "section": ":white_check_mark: Testing"
-            }
+            { "type": "feat", "section": ":sparkles: Features" },
+            { "type": "perf", "section": ":zap: Performance Enhancement" },
+            { "type": "fix", "section": ":bug: Fixes" },
+            { "type": "build", "section": ":building_construction: Build" },
+            { "type": "refactor", "section": ":recycle: Refactoring" },
+            { "type": "revert", "section": ":rewind: Revert" },
+            { "type": "chore", "section": ":arrow_up: Updates" },
+            { "type": "ci", "section": ":repeat: Continuous Integration" },
+            { "type": "docs", "section": ":memo: Documentation" },
+            { "type": "style", "section": ":art: Styling" },
+            { "type": "test", "section": ":white_check_mark: Testing" }
           ]
         }
       }
