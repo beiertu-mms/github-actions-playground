@@ -11,8 +11,6 @@ jobs:
     if: github.actor != 'dependabot[bot]'
     permissions:
       contents: write
-    env:
-      semantic_version: "20.0.1"
     outputs:
       release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
@@ -26,7 +24,6 @@ jobs:
         uses: cycjimmy/semantic-release-action@v8
         id: semantic
         with:
-          semantic_version: ${{ env.semantic_version }}
           dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
