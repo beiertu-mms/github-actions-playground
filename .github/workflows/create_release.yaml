@@ -19,8 +19,7 @@ jobs:
 
       - name: Install changelog-conventionalcommits
         run: |
-          npm i -D conventional-changelog@8 conventional-changelog-conventionalcommits
-          npm i -D conventional-changelog-conventionalcommits
+          npm i -D conventional-changelog@8 conventional-changelog-writer@9 conventional-changelog-conventionalcommits@10
 
       - name: Get next Release
         uses: cycjimmy/semantic-release-action@v8
