@@ -27,20 +27,20 @@ jobs:
         with:
           skip_npm_plugin: true
           semantic_version: 25.0.9
-          dry_run: true
+          dry_run: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v3
-        if: ${{ steps.semantic.outputs.new_release_version != null }}
-        env:
-          VERSION: ${{ steps.semantic.outputs.new_release_version }}
-        with:
-          tag_name: ${{ env.VERSION }}
-          name: Version ${{ env.VERSION }}
-          body: |
-            ${{ env.VERSION }}
+    # - name: Create Release
+    #   uses: softprops/action-gh-release@v3
+    #   if: ${{ steps.semantic.outputs.new_release_version != null }}
+    #   env:
+    #     VERSION: ${{ steps.semantic.outputs.new_release_version }}
+    #   with:
+    #     tag_name: ${{ env.VERSION }}
+    #     name: Version ${{ env.VERSION }}
+    #     body: |
+    #       ${{ env.VERSION }}
 
   update_pom:
     name: Update pom versions
