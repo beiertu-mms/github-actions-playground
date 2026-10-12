@@ -17,13 +17,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v7
 
-      - name: Install changelog-conventionalcommits
-        run: npm i -D conventional-changelog-conventionalcommits
+      # - name: Install changelog-conventionalcommits
+      # run: npm i -D conventional-changelog-conventionalcommits
 
       - name: Get next Release
         uses: cycjimmy/semantic-release-action@v8
         id: semantic
         with:
+          # extra_plugins: |
+          #   @semantic-release/changelog@6.0.0
+          #   @semantic-release/git
+          semantic_version: 25.0.9
           dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
