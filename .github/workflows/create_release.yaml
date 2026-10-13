@@ -20,9 +20,9 @@ jobs:
         uses: actions/checkout@v7
 
       # https://conventional-changelog.js.org/presets/conventional-commits/
-      - name: Install changelog-conventionalcommits
+      - name: Install changelog dependencies
         run: |
-          npm i -D conventional-changelog conventional-changelog-conventionalcommits
+          npm i -D conventional-changelog@8 conventional-changelog-conventionalcommits@10
 
       - name: Get next Release
         uses: cycjimmy/semantic-release-action@v8
