@@ -6,6 +6,7 @@
     [
       "@semantic-release/commit-analyzer",
       {
+        "preset": "conventionalcommits",
         "releaseRules": [
           { "type": "feat", "release": "minor" },
           { "type": "perf", "release": "minor" },
@@ -22,31 +23,31 @@
       }
     ],
     [
-      "@semantic-release/github",
-      {
-        "successComment": false,
-        "failTitle": false
-      }
-    ],
-    [
       "@semantic-release/release-notes-generator",
       {
         "preset": "conventionalcommits",
         "presetConfig": {
           "types": [
-            { "type": "feat", "section": ":sparkles: Features" },
-            { "type": "perf", "section": ":zap: Performance Enhancement" },
-            { "type": "fix", "section": ":bug: Fixes" },
-            { "type": "build", "section": ":building_construction: Build" },
-            { "type": "refactor", "section": ":recycle: Refactoring" },
-            { "type": "revert", "section": ":rewind: Revert" },
-            { "type": "chore", "section": ":arrow_up: Updates" },
-            { "type": "ci", "section": ":repeat: Continuous Integration" },
-            { "type": "docs", "section": ":memo: Documentation" },
-            { "type": "style", "section": ":art: Styling" },
-            { "type": "test", "section": ":white_check_mark: Testing" }
+            { "type": "feat", "section": ":sparkles: Features", "hidden": false },
+            { "type": "perf", "section": ":zap: Performance Enhancement", "hidden": false },
+            { "type": "fix", "section": ":bug: Fixes", "hidden": false },
+            { "type": "build", "section": ":building_construction: Build", "hidden": false },
+            { "type": "refactor", "section": ":recycle: Refactoring", "hidden": false },
+            { "type": "revert", "section": ":rewind: Revert", "hidden": false },
+            { "type": "chore", "section": ":arrow_up: Updates", "hidden": false },
+            { "type": "ci", "section": ":repeat: Continuous Integration", "hidden": false },
+            { "type": "docs", "section": ":memo: Documentation", "hidden": false },
+            { "type": "style", "section": ":art: Styling", "hidden": false },
+            { "type": "test", "section": ":white_check_mark: Testing", "hidden": false }
           ]
         }
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "successComment": false,
+        "failTitle": false
       }
     ]
   ]
