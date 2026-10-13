@@ -26,7 +26,7 @@ jobs:
         with:
           semantic_version: 25.0.9
           extra_plugins: |
-            conventional-changelog-conventionalcommits@9
+            conventional-changelog-conventionalcommits@9.3.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
