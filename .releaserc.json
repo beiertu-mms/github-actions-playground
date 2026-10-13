@@ -46,8 +46,8 @@
     [
       "@semantic-release/github",
       {
-        "successComment": false,
-        "failTitle": false
+        "successCommentCondition": false,
+        "failCommentCondition": false
       }
     ]
   ]
